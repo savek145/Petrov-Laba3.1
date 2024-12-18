@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+      <input type="tel" id="phoneInput" placeholder="Введите номер телефона" value="+7">
+      <button onclick="findUserOrders()">Найти заказы</button>
+      <div id="result"></div>
+
+      <script>
+        let users = [
+            { id: 1, name: "Иван Петров", age: 25, email: "ivan@vk.com", phone: "+79991234567" },
+            { id: 2, name: "Анна Сидорова", age: 30, email: "anna@mail.ru", phone: "+79999876543" }
+        ];
+
+        let orders = [
+            { id: 1, userId: 1, restaurantId: 1, items: ["Пицца", "Кола"], total: 850 },
+            { id: 2, userId: 2, restaurantId: 2, items: ["Суши", "Чай"], total: 1200 }
+        ];
+
+        let restaurants = [
+            { id: 1, name: "Пиццерия", rating: 4.5, cuisine: "Итальянская" },
+            { id: 2, name: "Суши-бар", rating: 4.8, cuisine: "Японская" }
+        ];
+
+        function findUserOrders() {
+            let phoneNumber = document.getElementById('phoneInput').value;
+            let resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = '';
+
+            let user = users.find(u => u.phone === phoneNumber);
+            
+            if (!user) {
+                resultDiv.innerHTML = 'Пользователь не найден';
+                return;
+            }
+
+            let output = `<h3>Пользователь: ${user.name}</h3>`;
+            let userOrders = orders.filter(order => order.userId === user.id);
+            
+            if (userOrders.length === 0) {
+                output += '<p>У пользователя нет заказов</p>';
+            } else {
+                userOrders.forEach(order => {
+                    let restaurant = restaurants.find(r => r.id === order.restaurantId);
+                    output += `
+                        <p>Заказ из ресторана "${restaurant.name}"</p>
+                        <p>Заказанные блюда: ${order.items.join(", ")}</p>
+                        <p>Сумма заказа: ${order.total} руб.</p>
+                        <hr>
+                    `;
+                });
+            }
+            
+            resultDiv.innerHTML = output;
+        }
+      </script>
+</body>
+</html>

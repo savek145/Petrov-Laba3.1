@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    function User(name) {
+        this.name = name;
+        this.isAdmin = false;
+      }
+      
+      let user = new User("Аня");
+      let user2 = new User("Савелий"); 
+      let user3 = new User("Алина");
+      let user4 = new User("Даша");
+      let user5 = new User("Дима");
+      
+      alert(user.name); // Вася
+      alert(user.isAdmin); // false
+      alert(user2.name);
+      alert(user2.isAdmin);
+      alert(user3.name);
+      alert(user3.isAdmin);
+      alert(user4.name);
+      alert(user4.isAdmin);
+      alert(user5.name);
+      alert(user5.isAdmin);
+    </script>
+</body>
+</html>

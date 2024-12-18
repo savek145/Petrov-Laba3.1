@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Калькулятор</title>
+</head>
+<body>
+    <h2>Калькулятор</h2>
+    <input type="number" id="num1" placeholder="Первое число">
+    <input type="number" id="num2" placeholder="Второе число">
+    <br><br>
+    <button onclick="calc('sum')">Сложить</button>
+    <button onclick="calc('min')">Вычесть</button>
+    <button onclick="calc('um')">Умножить</button>
+    <button onclick="calc('del')">Разделить</button>
+    <p id="result"></p>
+
+    <script>
+        let calculator = {
+            sum: function(a, b) {
+                return a + b;
+            },
+            min: function(a, b) {
+                return a - b;
+            },
+            um: function(a, b) {
+                return a * b;
+            },
+            del: function(a, b) {
+                if (b === 0) {
+                    return "Деление на ноль невозможно";
+                }
+                return a / b;
+            }
+        };
+
+        function calc(operation) {
+            let num1 = parseFloat(document.getElementById('num1').value);
+            let num2 = parseFloat(document.getElementById('num2').value);
+            let result;
+
+            if (isNaN(num1) || isNaN(num2)) {
+                result = "Пожалуйста, введите числа";
+            } else {
+                result = calculator[operation](num1, num2);
+            }
+
+            document.getElementById('result').textContent = "Результат: " + result;
+        }
+    </script>
+</body>
+</html>
